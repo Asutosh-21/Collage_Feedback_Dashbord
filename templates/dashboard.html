@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>College Event Feedback Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+  <div class="main-bg">
+    <div class="container py-4">
+      <h1 class="text-center text-white mb-4">🎓 College Event Feedback Dashboard</h1>
+
+      <!-- Filters -->
+      <form id="filter-form" method="POST" action="/filter" class="row g-3 mb-4 bg-light p-3 rounded">
+        <div class="col-md-6">
+          <label class="form-label">Select Department</label>
+          <select name="department" class="form-select">
+            {% for dept in departments %}
+              <option value="{{ dept }}">{{ dept }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Select Event Type</label>
+          <select name="event_type" class="form-select">
+            {% for et in event_types %}
+              <option value="{{ et }}">{{ et }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="text-end">
+          <button type="submit" class="btn btn-primary mt-3">Apply Filters</button>
+        </div>
+      </form>
+
+      <!-- Top Events -->
+      <div class="card shadow mb-4">
+        <div class="card-body">
+          <h5 class="card-title">🏆 Top 3 Events by Satisfaction</h5>
+          <ul>
+            {% for event, score in top_events.items() %}
+              <li><strong>{{ event }}</strong> — {{ score }}/5</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+
+      <!-- Charts -->
+      <div class="row">
+        <div class="col-lg-6 mb-4">
+          <div class="card shadow">
+            <div class="card-body">
+              <h6 class="card-title">Department-wise Satisfaction</h6>
+              <div id="dept-chart"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 mb-4">
+          <div class="card shadow">
+            <div class="card-body">
+              <h6 class="card-title">Event Type vs Satisfaction</h6>
+              <div id="type-chart"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 mb-4">
+          <div class="card shadow">
+            <div class="card-body">
+              <h6 class="card-title">Sentiment Distribution</h6>
+              <div id="sentiment-chart"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    const deptGraph = {{ dept_graph | safe }};
+    const typeGraph = {{ type_graph | safe }};
+    const sentimentGraph = {{ sentiment_graph | safe }};
+    Plotly.newPlot('dept-chart', deptGraph.data, deptGraph.layout);
+    Plotly.newPlot('type-chart', typeGraph.data, typeGraph.layout);
+    Plotly.newPlot('sentiment-chart', sentimentGraph.data, sentimentGraph.layout);
+  </script>
+</body>
+</html>

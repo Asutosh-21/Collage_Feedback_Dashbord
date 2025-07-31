@@ -1,0 +1,110 @@
+/* style.css - College Feedback Dashboard Theme */
+
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #111;
+  background-color: #f8f9fa;
+}
+
+.main-bg {
+  background: url('https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  backdrop-filter: blur(4px);
+  padding-bottom: 40px;
+}
+
+h1, h5, h6 {
+  color: #ffffff;
+  text-shadow: 1px 1px 2px #000;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.card-title {
+  font-weight: bold;
+  color: #0077b6;
+}
+
+ul li {
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+  color: #222;
+}
+
+label, .form-select, .btn {
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background-color: #023e8a;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0077b6;
+}
+
+/* Dark mode toggle base */
+[data-theme="dark"] body {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .card {
+  background-color: rgba(30, 30, 30, 0.95);
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .btn-primary {
+  background-color: #219ebc;
+}
+
+[data-theme="dark"] .btn-primary:hover {
+  background-color: #023e8a;
+}
+
+/* Dark mode toggle button */
+.toggle-theme-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  padding: 10px 15px;
+  font-size: 1rem;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.toggle-theme-btn:hover {
+  background-color: #495057;
+}
+
+@media (max-width: 768px) {
+  .card {
+    margin: 10px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+}
